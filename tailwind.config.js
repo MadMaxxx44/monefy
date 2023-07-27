@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import tailwindcssAnimateCSS from "tailwindcss-animatecss";
+import tailwindScrollbarHide from "tailwind-scrollbar-hide";
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -20,5 +21,5 @@ export default {
       classes: ["bounceIn"],
     },
   },
-  plugins: [tailwindcssAnimateCSS],
+  plugins: [tailwindcssAnimateCSS, tailwindScrollbarHide],
 };
