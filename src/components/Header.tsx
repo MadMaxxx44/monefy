@@ -7,10 +7,10 @@ type HeaderProps = {
 const Header = ({ setSidebar }: HeaderProps) => {
   return (
     <header className="flex h-10 w-full bg-green-500 justify-between px-4 border-b-2 border-solid items-center text-2xl font-serif">
-      <h1 className="font-bold">Monefy</h1>
+      <h1 className="font-bold text-gray-100">Monefy</h1>
       <img
         onClick={() => setSidebar(true)}
-        className="h-5 hover:cursor-pointer"
+        className="h-5 hover:cursor-pointer transition-all ease-in-out duration-300"
         src={dots}
         alt="menu"
       />
