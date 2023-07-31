@@ -17,20 +17,16 @@ import taxi from "../images/taxi.png";
 import transport from "../images/transport.png";
 import deposits from "../images/deposits.png";
 import salary from "../images/salary.png";
+import { useMonefy } from "../context/MonefyContext";
 
-type SideBarProps = {
-  categories: boolean;
-  sidebar: boolean;
-  setSidebar: (arg0: boolean) => void;
-  setCategories: (arg0: boolean) => void;
-};
-
-const Sidebar = ({
-  categories,
-  sidebar,
-  setSidebar,
-  setCategories,
-}: SideBarProps) => {
+const Sidebar = () => {
+  const {
+    sidebar,
+    closeSidebar,
+    categories,
+    closeCategories,
+    toggleCategories,
+  } = useMonefy();
   return (
     <div
       className={
@@ -41,15 +37,15 @@ const Sidebar = ({
     >
       <img
         onClick={() => {
-          setSidebar(false);
-          setCategories(false);
+          closeSidebar();
+          closeCategories();
         }}
         className="absolute left-0 h-10 w-10 p-2 hover:cursor-pointer hover:bg-green-300 hover:border-x-2 hover:border-b-2 hover:border-solid"
         src={close}
         alt="close"
       />
       <div
-        onClick={() => setCategories(!categories)}
+        onClick={toggleCategories}
         className="flex flex-col items-center hover:bg-gray-200 hover:cursor-pointer pb-8"
       >
         <img

@@ -15,43 +15,39 @@ import taxi from "../images/taxi.png";
 import transport from "../images/transport.png";
 import deposits from "../images/deposits.png";
 import salary from "../images/salary.png";
+import { useMonefy } from "../context/MonefyContext";
 
-type NewFormProps = {
-  incomeForm: boolean;
-  incomeInput: string;
-  isLocked: boolean;
-  setIncomeForm: (arg0: boolean) => void;
-  setIncomeInput: (arg0: string) => void;
-  setIsLocked: (arg0: boolean) => void;
-  expenseForm: boolean;
-  setExpenseForm: (arg0: boolean) => void;
-};
-
-const NewIncome = ({
-  incomeForm,
-  incomeInput,
-  isLocked,
-  setIncomeForm,
-  setIncomeInput,
-  setIsLocked,
-  expenseForm,
-  setExpenseForm,
-}: NewFormProps) => {
+const NewIncome = () => {
+  const {
+    red,
+    green,
+    setRed,
+    setGreen,
+    form,
+    closeForm,
+    input,
+    setInput,
+    isLocked,
+    locked,
+    unlocked,
+    expenseForm,
+    closeExpenseForm,
+  } = useMonefy();
   return (
     <div
       className={
-        incomeForm
-          ? "absolute top-0 transition-all ease-in-out duration-500 flex flex-col w-full h-full items-center bg-slate-50"
+        form
+          ? "absolute top-0 transition-all ease-in-out duration-700 flex flex-col w-full h-full items-center bg-slate-50"
           : "absolute top-0 opacity-0 pointer-events-none"
       }
     >
       <div className="flex w-full p-1.5 text-xl justify-center bg-green-500">
         <button
           onClick={() => {
-            setIncomeForm(false);
-            setExpenseForm(false);
-            setIsLocked(true);
-            setIncomeInput("0");
+            closeForm();
+            closeExpenseForm();
+            locked();
+            setInput("0");
           }}
           className="absolute top-[-1px] left-0 p-2"
         >
@@ -67,17 +63,17 @@ const NewIncome = ({
           <input
             className={"relative bg-green-500 h-8 outline-none text-gray-100"}
             type="number"
-            value={incomeInput}
-            onChange={(e) => setIncomeInput(e.target.value)}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           />
         </div>
         <button
           onClick={() => {
-            incomeInput > "0" ? setIsLocked(false) : setIsLocked(true);
+            input > "0" ? unlocked() : locked();
           }}
           className={
             isLocked
-              ? "hover:bg-green-500 text-l font-light px-4 py-2 border-1 border-solid border-green-500 uppercase"
+              ? "hover:bg-green-500 text-l transition-all ease-in-out duration-700 font-light px-4 py-2 border-1 border-solid border-green-500 uppercase"
               : "opacity-0 pointer-events-none"
           }
         >
@@ -87,14 +83,17 @@ const NewIncome = ({
           className={
             isLocked || expenseForm
               ? "opacity-0 pointer-events-none"
-              : "duration-500 flex w-full h-full"
+              : "flex w-full h-full gap-2 transition-all ease-in-out duration-700"
           }
         >
           <div
             onClick={() => {
-              setIncomeForm(false);
-              setIsLocked(true);
-              setIncomeInput("0");
+              input > "0"
+                ? (closeForm(),
+                  locked(),
+                  setInput("0"),
+                  setGreen(green + Number(input)))
+                : (locked(), setInput("0"));
             }}
             className="flex flex-col w-16 text-sm hover:bg-green-500 hover:cursor-pointer p-2 items-center"
           >
@@ -103,9 +102,12 @@ const NewIncome = ({
           </div>
           <div
             onClick={() => {
-              setIncomeForm(false);
-              setIsLocked(true);
-              setIncomeInput("0");
+              input > "0"
+                ? (closeForm(),
+                  locked(),
+                  setInput("0"),
+                  setGreen(green + Number(input)))
+                : (locked(), setInput("0"));
             }}
             className="flex flex-col w-16 text-sm hover:bg-green-500 hover:cursor-pointer p-2 items-center"
           >
@@ -114,7 +116,7 @@ const NewIncome = ({
           </div>
         </div>
         <div
-          className={`absolute top-[145px] left-1 transition-all ease-in-out duration-1000 items-center ${
+          className={`absolute top-[145px] left-1 transition-all ease-in-out duration-700 items-center ${
             isLocked ? "opacity-0 pointer-events-none" : "flex w-full h-full"
           }
           ${
@@ -126,10 +128,13 @@ const NewIncome = ({
           <div className="flex gap-3">
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -138,10 +143,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -150,10 +158,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -164,10 +175,13 @@ const NewIncome = ({
           <div className="flex gap-3">
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -176,10 +190,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -188,10 +205,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -202,10 +222,13 @@ const NewIncome = ({
           <div className="flex gap-3">
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -214,10 +237,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -226,10 +252,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -240,10 +269,13 @@ const NewIncome = ({
           <div className="flex gap-3">
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -256,10 +288,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -268,10 +303,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -282,10 +320,13 @@ const NewIncome = ({
           <div className="flex gap-3">
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -294,10 +335,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
@@ -306,10 +350,13 @@ const NewIncome = ({
             </div>
             <div
               onClick={() => {
-                setIncomeForm(false);
-                setIsLocked(true);
-                setIncomeInput("0");
-                setExpenseForm(false);
+                input > "0"
+                  ? (closeForm(),
+                    locked(),
+                    setInput("0"),
+                    closeExpenseForm(),
+                    setRed(red + Number(input)))
+                  : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer px-2 items-center"
             >

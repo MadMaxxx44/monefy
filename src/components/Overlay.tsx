@@ -1,15 +1,12 @@
-type OverlayProps = {
-  setSidebar: (arg0: boolean) => void;
-  setCategories: (arg0: boolean) => void;
-  sidebar: boolean;
-};
+import { useMonefy } from "../context/MonefyContext";
 
-const Overlay = ({ setSidebar, setCategories, sidebar }: OverlayProps) => {
+const Overlay = () => {
+  const { sidebar, closeSidebar, closeCategories } = useMonefy();
   return (
     <div
       onClick={() => {
-        setSidebar(false);
-        setCategories(false);
+        closeSidebar();
+        closeCategories();
       }}
       className={
         sidebar
