@@ -13,7 +13,7 @@ const Balance = () => {
 
   return (
     <button
-      className={`flex text-2xl items-center w-fit h-8 p-4 mt-20 mb-14 ${balanceBgDefault}`}
+      className={`flex text-2xl items-center w-fit h-8 p-4 mt-5 mb-7 ${balanceBgDefault}`}
     >
       Balance {formatCurrency(balance)}&#8372;
     </button>
