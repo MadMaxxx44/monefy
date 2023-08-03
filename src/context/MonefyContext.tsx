@@ -30,6 +30,8 @@ type MonefyContext = {
   expenseForm: boolean;
   openExpenseForm: () => void;
   closeExpenseForm: () => void;
+  dataArr: number[];
+  setDataArr: (arg0: number[]) => void;
 };
 
 const MonefyContext = createContext({} as MonefyContext);
@@ -60,6 +62,8 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
   const [expenseForm, setExpenseForm] = useState(false);
   const openExpenseForm = () => setExpenseForm(true);
   const closeExpenseForm = () => setExpenseForm(false);
+
+  const [dataArr, setDataArr] = useState<number[]>(new Array(14).fill(1));
 
   const formatter = new Intl.NumberFormat(undefined, {
     style: "decimal",
@@ -99,6 +103,8 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
         expenseForm,
         openExpenseForm,
         closeExpenseForm,
+        dataArr,
+        setDataArr,
       }}
     >
       {children}

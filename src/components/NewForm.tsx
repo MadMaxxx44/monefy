@@ -32,7 +32,17 @@ const NewIncome = () => {
     unlocked,
     expenseForm,
     closeExpenseForm,
+    dataArr,
+    setDataArr,
   } = useMonefy();
+
+  const setArrData = (index: number, value: number) => {
+    const newData = [...dataArr];
+    newData[index] += value;
+    setDataArr(newData);
+    console.log(newData);
+  };
+
   return (
     <div
       className={
@@ -133,7 +143,8 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(0, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
@@ -148,7 +159,8 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(1, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
