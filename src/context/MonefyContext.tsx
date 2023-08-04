@@ -1,5 +1,16 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
+interface HistoryArr {
+  id: string;
+  // date: Date;
+  name: string;
+  amount: number;
+}
+
+interface Dates {
+  [date: string]: HistoryArr[];
+}
+
 type MonefyProviderProps = {
   children: ReactNode;
 };
@@ -32,6 +43,29 @@ type MonefyContext = {
   closeExpenseForm: () => void;
   dataArr: number[];
   setDataArr: (arg0: number[]) => void;
+  history: boolean;
+  toggleHistory: () => void;
+  historyArr: HistoryArr[];
+  setHistoryArr: (arg0: HistoryArr[]) => void;
+  arrow: boolean;
+  toggleArrow: () => void;
+  depositsStr: string;
+  salaryStr: string;
+  hygieneStr: string;
+  foodStr: string;
+  homeStr: string;
+  healthStr: string;
+  cafeStr: string;
+  carStr: string;
+  clothesStr: string;
+  petsStr: string;
+  entertainmentStr: string;
+  giftsStr: string;
+  connectionStr: string;
+  sportStr: string;
+  billsStr: string;
+  taxiStr: string;
+  transportStr: string;
 };
 
 const MonefyContext = createContext({} as MonefyContext);
@@ -62,8 +96,29 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
   const [expenseForm, setExpenseForm] = useState(false);
   const openExpenseForm = () => setExpenseForm(true);
   const closeExpenseForm = () => setExpenseForm(false);
-
-  const [dataArr, setDataArr] = useState<number[]>(new Array(14).fill(1));
+  const [dataArr, setDataArr] = useState<number[]>(new Array(15).fill(0));
+  const [history, setHistory] = useState(false);
+  const toggleHistory = () => setHistory(!history);
+  const [historyArr, setHistoryArr] = useState<HistoryArr[]>([]);
+  const [arrow, setArrow] = useState(false);
+  const toggleArrow = () => setArrow(!arrow);
+  const depositsStr: string = "Deposits";
+  const salaryStr: string = "Salary";
+  const hygieneStr: string = "Hygiene";
+  const foodStr: string = "Food";
+  const homeStr: string = "Home";
+  const healthStr: string = "Health";
+  const cafeStr: string = "Cafe";
+  const carStr: string = "Car";
+  const clothesStr: string = "Clothes";
+  const petsStr: string = "Pets";
+  const entertainmentStr: string = "Entertainment";
+  const giftsStr: string = "Gifts";
+  const connectionStr: string = "Connection";
+  const sportStr: string = "Sport";
+  const billsStr: string = "Bills";
+  const taxiStr: string = "Taxi";
+  const transportStr: string = "Transport";
 
   const formatter = new Intl.NumberFormat(undefined, {
     style: "decimal",
@@ -105,6 +160,29 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
         closeExpenseForm,
         dataArr,
         setDataArr,
+        history,
+        toggleHistory,
+        historyArr,
+        setHistoryArr,
+        arrow,
+        toggleArrow,
+        depositsStr,
+        salaryStr,
+        hygieneStr,
+        foodStr,
+        homeStr,
+        healthStr,
+        cafeStr,
+        carStr,
+        clothesStr,
+        petsStr,
+        entertainmentStr,
+        giftsStr,
+        connectionStr,
+        sportStr,
+        billsStr,
+        taxiStr,
+        transportStr,
       }}
     >
       {children}

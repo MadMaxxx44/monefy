@@ -28,15 +28,24 @@ const doughnutLabelsLine = {
       chartArea: { width, height },
     } = chart;
 
+    let totalSum: number = 0;
+    chart.data.datasets[0].data.forEach((value: number) => {
+      totalSum += value;
+    });
+
     chart.data.datasets.forEach((dataset: any, i: number) => {
       chart.getDatasetMeta(i).data.forEach((datapoint: any, index: number) => {
         const { x, y } = datapoint.tooltipPosition();
-
-        const halfHeight = height / 1.9;
-        const halfWidth = width / 1.9;
+        const halfHeight = height / 2;
+        const halfWidth = width / 2;
 
         const xLine = x > halfWidth ? x + 20 : x - 20;
         const yLine = y > halfHeight ? y + 20 : y - 20;
+
+        const percentage =
+          (chart.data.datasets[0].data[index] / totalSum) * 100;
+
+        if (chart.data.datasets[0].data[index] == 0) return;
 
         ctx.beginPath();
         ctx.moveTo(x, y);
@@ -49,10 +58,14 @@ const doughnutLabelsLine = {
         const imgHeight = 35;
         const imgWidth = 35;
 
-        const xImg = x >= halfWidth ? xLine : xLine - 32;
-        const yImg = y >= halfHeight ? yLine : yLine - 32;
+        const xImg = x >= halfWidth ? xLine : xLine - 40;
+        const yImg = y >= halfHeight ? yLine : yLine - 40;
 
         ctx.drawImage(img, xImg, yImg, imgHeight, imgWidth);
+
+        ctx.fillStyle = "#000000";
+        ctx.font = "12px Arial";
+        ctx.fillText(percentage.toFixed() + "%", xImg + 7, yImg + 47);
       });
     });
   },
@@ -98,7 +111,7 @@ const Chart = () => {
     ],
     datasets: [
       {
-        label: "# of Votes",
+        label: "Amount",
         data: dataArr,
         backgroundColor: [
           "rgba(255, 0, 0, 1)",

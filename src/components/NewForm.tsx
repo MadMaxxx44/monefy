@@ -34,13 +34,38 @@ const NewIncome = () => {
     closeExpenseForm,
     dataArr,
     setDataArr,
+    historyArr,
+    setHistoryArr,
+    depositsStr,
+    salaryStr,
+    hygieneStr,
+    foodStr,
+    homeStr,
+    healthStr,
+    cafeStr,
+    carStr,
+    clothesStr,
+    petsStr,
+    entertainmentStr,
+    giftsStr,
+    connectionStr,
+    sportStr,
+    billsStr,
+    taxiStr,
+    transportStr,
   } = useMonefy();
 
   const setArrData = (index: number, value: number) => {
     const newData = [...dataArr];
     newData[index] += value;
     setDataArr(newData);
-    console.log(newData);
+  };
+
+  const setHistory = (name: string, amount: number) => {
+    const newArr = [...historyArr];
+    newArr.push({ id: crypto.randomUUID(), name, amount });
+    setHistoryArr(newArr);
+    console.log(newArr);
   };
 
   return (
@@ -102,13 +127,14 @@ const NewIncome = () => {
                 ? (closeForm(),
                   locked(),
                   setInput("0"),
-                  setGreen(green + Number(input)))
+                  setGreen(green + Number(input)),
+                  setHistory(depositsStr, Number(input)))
                 : (locked(), setInput("0"));
             }}
             className="flex flex-col w-16 text-sm hover:bg-green-500 hover:cursor-pointer p-2 items-center"
           >
             <img className="h-8 w-8" src={deposits} alt="deposits" />
-            Deposits
+            {depositsStr}
           </div>
           <div
             onClick={() => {
@@ -116,13 +142,14 @@ const NewIncome = () => {
                 ? (closeForm(),
                   locked(),
                   setInput("0"),
-                  setGreen(green + Number(input)))
+                  setGreen(green + Number(input)),
+                  setHistory(salaryStr, Number(input)))
                 : (locked(), setInput("0"));
             }}
             className="flex flex-col w-16 text-sm hover:bg-green-500 hover:cursor-pointer p-2 items-center"
           >
             <img className="h-8 w-8" src={salary} alt="deposit" />
-            Salary
+            {salaryStr}
           </div>
         </div>
         <div
@@ -144,13 +171,14 @@ const NewIncome = () => {
                     setInput("0"),
                     closeExpenseForm(),
                     setRed(red + Number(input)),
-                    setArrData(0, Number(input)))
+                    setArrData(0, Number(input)),
+                    setHistory(hygieneStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={hygiene} alt="hygiene" />
-              Hygiene
+              {hygieneStr}
             </div>
             <div
               onClick={() => {
@@ -160,13 +188,14 @@ const NewIncome = () => {
                     setInput("0"),
                     closeExpenseForm(),
                     setRed(red + Number(input)),
-                    setArrData(1, Number(input)))
+                    setArrData(1, Number(input)),
+                    setHistory(foodStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={food} alt="food" />
-              Food
+              {foodStr}
             </div>
             <div
               onClick={() => {
@@ -175,13 +204,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(2, Number(input)),
+                    setHistory(homeStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={home} alt="home" />
-              Home
+              {homeStr}
             </div>
           </div>
           <div className="flex gap-3">
@@ -192,13 +223,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(3, Number(input)),
+                    setHistory(healthStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={health} alt="health" />
-              Health
+              {healthStr}
             </div>
             <div
               onClick={() => {
@@ -207,13 +240,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(4, Number(input)),
+                    setHistory(cafeStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={cafe} alt="cafe" />
-              Cafe
+              {cafeStr}
             </div>
             <div
               onClick={() => {
@@ -222,13 +257,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(5, Number(input)),
+                    setHistory(carStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={car} alt="car" />
-              Car
+              {carStr}
             </div>
           </div>
           <div className="flex gap-3">
@@ -239,13 +276,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(6, Number(input)),
+                    setHistory(clothesStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={clothes} alt="clothes" />
-              Clothes
+              {clothesStr}
             </div>
             <div
               onClick={() => {
@@ -254,13 +293,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(7, Number(input)),
+                    setHistory(petsStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={pets} alt="pets" />
-              Pets
+              {petsStr}
             </div>
             <div
               onClick={() => {
@@ -269,13 +310,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(8, Number(input)),
+                    setHistory(giftsStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={gifts} alt="gifts" />
-              Gifts
+              {giftsStr}
             </div>
           </div>
           <div className="flex gap-3">
@@ -286,7 +329,9 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(9, Number(input)),
+                    setHistory(entertainmentStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
@@ -296,7 +341,7 @@ const NewIncome = () => {
                 src={entertainment}
                 alt="entertainment"
               />
-              Entertainment
+              {entertainmentStr}
             </div>
             <div
               onClick={() => {
@@ -305,13 +350,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(10, Number(input)),
+                    setHistory(connectionStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={connection} alt="connection" />
-              Connection
+              {connectionStr}
             </div>
             <div
               onClick={() => {
@@ -320,13 +367,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(11, Number(input)),
+                    setHistory(sportStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={sport} alt="sport" />
-              Sport
+              {sportStr}
             </div>
           </div>
           <div className="flex gap-3">
@@ -337,13 +386,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(12, Number(input)),
+                    setHistory(billsStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={bills} alt="bills" />
-              Bills
+              {billsStr}
             </div>
             <div
               onClick={() => {
@@ -352,13 +403,15 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(13, Number(input)),
+                    setHistory(taxiStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
               <img className="h-8 w-8" src={taxi} alt="taxi" />
-              Taxi
+              {taxiStr}
             </div>
             <div
               onClick={() => {
@@ -367,7 +420,9 @@ const NewIncome = () => {
                     locked(),
                     setInput("0"),
                     closeExpenseForm(),
-                    setRed(red + Number(input)))
+                    setRed(red + Number(input)),
+                    setArrData(14, Number(input)),
+                    setHistory(transportStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer px-2 items-center"
@@ -377,7 +432,7 @@ const NewIncome = () => {
                 src={transport}
                 alt="transport"
               />
-              Transport
+              {transportStr}
             </div>
           </div>
         </div>

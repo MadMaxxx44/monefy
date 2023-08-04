@@ -26,6 +26,23 @@ const Sidebar = () => {
     categories,
     closeCategories,
     toggleCategories,
+    depositsStr,
+    salaryStr,
+    hygieneStr,
+    foodStr,
+    homeStr,
+    healthStr,
+    cafeStr,
+    carStr,
+    clothesStr,
+    petsStr,
+    entertainmentStr,
+    giftsStr,
+    connectionStr,
+    sportStr,
+    billsStr,
+    taxiStr,
+    transportStr,
   } = useMonefy();
   return (
     <div
@@ -69,68 +86,72 @@ const Sidebar = () => {
         </div>
         <ul className="flex flex-col">
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={hygiene} alt="hygiene" />
-            Hygiene
+            <img className="h-8 w-8" src={hygiene} alt={hygieneStr} />
+            {hygieneStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={food} alt="food" />
-            Food
+            <img className="h-8 w-8" src={food} alt={foodStr} />
+            {foodStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={home} alt="home" />
-            Home
+            <img className="h-8 w-8" src={home} alt={homeStr} />
+            {homeStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={health} alt="health" />
-            Health
+            <img className="h-8 w-8" src={health} alt={healthStr} />
+            {healthStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={cafe} alt="cafe" />
-            Cafe
+            <img className="h-8 w-8" src={cafe} alt={cafeStr} />
+            {cafeStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={car} alt="car" />
-            Car
+            <img className="h-8 w-8" src={car} alt={carStr} />
+            {carStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={clothes} alt="clothes" />
-            Clothes
+            <img className="h-8 w-8" src={clothes} alt={clothesStr} />
+            {clothesStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={pets} alt="pets" />
-            Pets
+            <img className="h-8 w-8" src={pets} alt={petsStr} />
+            {petsStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={gifts} alt="gifts" />
-            Gifts
+            <img className="h-8 w-8" src={gifts} alt={giftsStr} />
+            {giftsStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={entertainment} alt="entertainment" />
-            Entertainment
-          </li>
-          <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={connection} alt="connection" />
-            Connection
-          </li>
-          <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={sport} alt="sport" />
-            Sport
-          </li>
-          <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={bills} alt="bills" />
-            Bills
-          </li>
-          <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={taxi} alt="taxi" />
-            Taxi
-          </li>
-          <li className="flex flex-row gap-2 items-center hover:bg-green-300 hover: cursor-pointer">
             <img
-              className="h-12 w-12 object-contain"
-              src={transport}
-              alt="transport"
+              className="h-8 w-8"
+              src={entertainment}
+              alt={entertainmentStr}
             />
-            Transport
+            {entertainmentStr}
+          </li>
+          <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
+            <img className="h-8 w-8" src={connection} alt={connectionStr} />
+            {connectionStr}
+          </li>
+          <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
+            <img className="h-8 w-8" src={sport} alt={sportStr} />
+            {sportStr}
+          </li>
+          <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
+            <img className="h-8 w-8" src={bills} alt={billsStr} />
+            {billsStr}
+          </li>
+          <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
+            <img className="h-8 w-8" src={taxi} alt={taxiStr} />
+            {taxiStr}
+          </li>
+          <li className="flex flex-row pl-2 py-2 gap-2 items-center hover:bg-green-300 hover: cursor-pointer">
+            <img
+              className="h-8 w-8 object-contain"
+              src={transport}
+              alt={transportStr}
+            />
+            {transportStr}
           </li>
         </ul>
         <div className="bg-green-300">
@@ -138,12 +159,12 @@ const Sidebar = () => {
         </div>
         <ul className="flex flex-col">
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={deposits} alt="deposits" />
-            Deposits
+            <img className="h-8 w-8" src={deposits} alt={depositsStr} />
+            {depositsStr}
           </li>
           <li className="flex flex-row py-2 pl-2 gap-4 items-center hover:bg-green-300 hover: cursor-pointer">
-            <img className="h-8 w-8" src={salary} alt="salary" />
-            Salary
+            <img className="h-8 w-8" src={salary} alt={salaryStr} />
+            {salaryStr}
           </li>
         </ul>
       </div>
