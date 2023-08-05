@@ -34,8 +34,8 @@ const NewIncome = () => {
     closeExpenseForm,
     dataArr,
     setDataArr,
-    historyArr,
-    setHistoryArr,
+    dates,
+    setDates,
     depositsStr,
     salaryStr,
     hygieneStr,
@@ -61,11 +61,21 @@ const NewIncome = () => {
     setDataArr(newData);
   };
 
-  const setHistory = (name: string, amount: number) => {
-    const newArr = [...historyArr];
-    newArr.push({ id: crypto.randomUUID(), name, amount });
-    setHistoryArr(newArr);
-    console.log(newArr);
+  const f = Intl.DateTimeFormat("en-us", {
+    dateStyle: "medium",
+  });
+
+  const addDate = (name: string, amount: number) => {
+    const date = f.format(new Date()).toString();
+    const data = {
+      id: crypto.randomUUID(),
+      name: name,
+      amount: amount,
+    };
+    const arr = { ...dates };
+    arr[date] = [...(arr[date] || []), data];
+    setDates(arr);
+    console.log(arr);
   };
 
   return (
@@ -128,12 +138,12 @@ const NewIncome = () => {
                   locked(),
                   setInput("0"),
                   setGreen(green + Number(input)),
-                  setHistory(depositsStr, Number(input)))
+                  addDate(depositsStr, Number(input)))
                 : (locked(), setInput("0"));
             }}
             className="flex flex-col w-16 text-sm hover:bg-green-500 hover:cursor-pointer p-2 items-center"
           >
-            <img className="h-8 w-8" src={deposits} alt="deposits" />
+            <img className="h-8 w-8" src={deposits} alt={depositsStr} />
             {depositsStr}
           </div>
           <div
@@ -143,12 +153,12 @@ const NewIncome = () => {
                   locked(),
                   setInput("0"),
                   setGreen(green + Number(input)),
-                  setHistory(salaryStr, Number(input)))
+                  addDate(salaryStr, Number(input)))
                 : (locked(), setInput("0"));
             }}
             className="flex flex-col w-16 text-sm hover:bg-green-500 hover:cursor-pointer p-2 items-center"
           >
-            <img className="h-8 w-8" src={salary} alt="deposit" />
+            <img className="h-8 w-8" src={salary} alt={salaryStr} />
             {salaryStr}
           </div>
         </div>
@@ -172,12 +182,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(0, Number(input)),
-                    setHistory(hygieneStr, Number(input)))
+                    addDate(hygieneStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={hygiene} alt="hygiene" />
+              <img className="h-8 w-8" src={hygiene} alt={hygieneStr} />
               {hygieneStr}
             </div>
             <div
@@ -189,12 +199,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(1, Number(input)),
-                    setHistory(foodStr, Number(input)))
+                    addDate(foodStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={food} alt="food" />
+              <img className="h-8 w-8" src={food} alt={foodStr} />
               {foodStr}
             </div>
             <div
@@ -206,12 +216,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(2, Number(input)),
-                    setHistory(homeStr, Number(input)))
+                    addDate(homeStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={home} alt="home" />
+              <img className="h-8 w-8" src={home} alt={homeStr} />
               {homeStr}
             </div>
           </div>
@@ -225,12 +235,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(3, Number(input)),
-                    setHistory(healthStr, Number(input)))
+                    addDate(healthStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={health} alt="health" />
+              <img className="h-8 w-8" src={health} alt={healthStr} />
               {healthStr}
             </div>
             <div
@@ -242,12 +252,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(4, Number(input)),
-                    setHistory(cafeStr, Number(input)))
+                    addDate(cafeStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={cafe} alt="cafe" />
+              <img className="h-8 w-8" src={cafe} alt={cafeStr} />
               {cafeStr}
             </div>
             <div
@@ -259,12 +269,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(5, Number(input)),
-                    setHistory(carStr, Number(input)))
+                    addDate(carStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={car} alt="car" />
+              <img className="h-8 w-8" src={car} alt={carStr} />
               {carStr}
             </div>
           </div>
@@ -278,12 +288,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(6, Number(input)),
-                    setHistory(clothesStr, Number(input)))
+                    addDate(clothesStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={clothes} alt="clothes" />
+              <img className="h-8 w-8" src={clothes} alt={clothesStr} />
               {clothesStr}
             </div>
             <div
@@ -295,12 +305,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(7, Number(input)),
-                    setHistory(petsStr, Number(input)))
+                    addDate(petsStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={pets} alt="pets" />
+              <img className="h-8 w-8" src={pets} alt={petsStr} />
               {petsStr}
             </div>
             <div
@@ -312,12 +322,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(8, Number(input)),
-                    setHistory(giftsStr, Number(input)))
+                    addDate(giftsStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={gifts} alt="gifts" />
+              <img className="h-8 w-8" src={gifts} alt={giftsStr} />
               {giftsStr}
             </div>
           </div>
@@ -331,7 +341,7 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(9, Number(input)),
-                    setHistory(entertainmentStr, Number(input)))
+                    addDate(entertainmentStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
@@ -339,7 +349,7 @@ const NewIncome = () => {
               <img
                 className="h-8 w-8"
                 src={entertainment}
-                alt="entertainment"
+                alt={entertainmentStr}
               />
               {entertainmentStr}
             </div>
@@ -352,12 +362,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(10, Number(input)),
-                    setHistory(connectionStr, Number(input)))
+                    addDate(connectionStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={connection} alt="connection" />
+              <img className="h-8 w-8" src={connection} alt={connectionStr} />
               {connectionStr}
             </div>
             <div
@@ -369,12 +379,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(11, Number(input)),
-                    setHistory(sportStr, Number(input)))
+                    addDate(sportStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={sport} alt="sport" />
+              <img className="h-8 w-8" src={sport} alt={sportStr} />
               {sportStr}
             </div>
           </div>
@@ -388,12 +398,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(12, Number(input)),
-                    setHistory(billsStr, Number(input)))
+                    addDate(billsStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={bills} alt="bills" />
+              <img className="h-8 w-8" src={bills} alt={billsStr} />
               {billsStr}
             </div>
             <div
@@ -405,12 +415,12 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(13, Number(input)),
-                    setHistory(taxiStr, Number(input)))
+                    addDate(taxiStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
             >
-              <img className="h-8 w-8" src={taxi} alt="taxi" />
+              <img className="h-8 w-8" src={taxi} alt={taxiStr} />
               {taxiStr}
             </div>
             <div
@@ -422,7 +432,7 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(14, Number(input)),
-                    setHistory(transportStr, Number(input)))
+                    addDate(transportStr, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer px-2 items-center"
@@ -430,7 +440,7 @@ const NewIncome = () => {
               <img
                 className="w-20 h-[40px] object-contain"
                 src={transport}
-                alt="transport"
+                alt={transportStr}
               />
               {transportStr}
             </div>

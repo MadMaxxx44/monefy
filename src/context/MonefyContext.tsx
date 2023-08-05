@@ -1,14 +1,11 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-interface HistoryArr {
-  id: string;
-  // date: Date;
-  name: string;
-  amount: number;
-}
-
 interface Dates {
-  [date: string]: HistoryArr[];
+  [date: string]: {
+    id: string;
+    name: string;
+    amount: number;
+  }[];
 }
 
 type MonefyProviderProps = {
@@ -45,10 +42,10 @@ type MonefyContext = {
   setDataArr: (arg0: number[]) => void;
   history: boolean;
   toggleHistory: () => void;
-  historyArr: HistoryArr[];
-  setHistoryArr: (arg0: HistoryArr[]) => void;
-  arrow: boolean;
-  toggleArrow: () => void;
+  dates: Dates;
+  setDates: (arg0: Dates) => void;
+  openItems: Record<string, boolean>;
+  toggleItems: (arr0: string) => void;
   depositsStr: string;
   salaryStr: string;
   hygieneStr: string;
@@ -99,9 +96,13 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
   const [dataArr, setDataArr] = useState<number[]>(new Array(15).fill(0));
   const [history, setHistory] = useState(false);
   const toggleHistory = () => setHistory(!history);
-  const [historyArr, setHistoryArr] = useState<HistoryArr[]>([]);
-  const [arrow, setArrow] = useState(false);
-  const toggleArrow = () => setArrow(!arrow);
+  const [dates, setDates] = useState<Dates>({});
+  const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
+  const toggleItems = (arg0: string) => {
+    const updatedOpenItems = { ...openItems };
+    updatedOpenItems[arg0] = !updatedOpenItems[arg0];
+    setOpenItems(updatedOpenItems);
+  };
   const depositsStr: string = "Deposits";
   const salaryStr: string = "Salary";
   const hygieneStr: string = "Hygiene";
@@ -162,10 +163,10 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
         setDataArr,
         history,
         toggleHistory,
-        historyArr,
-        setHistoryArr,
-        arrow,
-        toggleArrow,
+        dates,
+        setDates,
+        openItems,
+        toggleItems,
         depositsStr,
         salaryStr,
         hygieneStr,
