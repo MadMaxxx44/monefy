@@ -80,8 +80,16 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
   const openCategories = () => setCategories(true);
   const closeCategories = () => setCategories(false);
   const toggleCategories = () => setCategories(!categories);
-  const [green, setGreen] = useState(0);
-  const [red, setRed] = useState(0);
+  const [green, setGreen] = useState(() => {
+    const localValue = localStorage.getItem("green");
+    if (localValue == null) return 0;
+    return JSON.parse(localValue) as number;
+  });
+  const [red, setRed] = useState(() => {
+    const localValue = localStorage.getItem("red");
+    if (localValue == null) return 0;
+    return JSON.parse(localValue) as number;
+  });
   const [balance, setBalance] = useState(0);
   const [form, setForm] = useState(false);
   const openForm = () => setForm(true);
@@ -93,10 +101,19 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
   const [expenseForm, setExpenseForm] = useState(false);
   const openExpenseForm = () => setExpenseForm(true);
   const closeExpenseForm = () => setExpenseForm(false);
-  const [dataArr, setDataArr] = useState<number[]>(new Array(15).fill(0));
+  const [dataArr, setDataArr] = useState<number[]>(() => {
+    new Array(15).fill(0);
+    const localValue = localStorage.getItem("dataArr");
+    if (localValue == null) return [];
+    return JSON.parse(localValue) as number[];
+  });
   const [history, setHistory] = useState(false);
   const toggleHistory = () => setHistory(!history);
-  const [dates, setDates] = useState<Dates>({});
+  const [dates, setDates] = useState<Dates>(() => {
+    const localValue = localStorage.getItem("dates2");
+    if (localValue == null) return {};
+    return JSON.parse(localValue) as Dates;
+  });
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
   const toggleItems = (arg0: string) => {
     const updatedOpenItems = { ...openItems };

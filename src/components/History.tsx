@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { useMonefy } from "../context/MonefyContext";
 
 const History = () => {
   const { dates, formatCurrency, openItems, toggleItems, history } =
     useMonefy();
+
+  useEffect(() => {
+    localStorage.setItem("dates2", JSON.stringify(dates));
+  }, [dates]);
 
   return (
     <>

@@ -16,6 +16,7 @@ import transport from "../images/transport.png";
 import deposits from "../images/deposits.png";
 import salary from "../images/salary.png";
 import { useMonefy } from "../context/MonefyContext";
+import { useEffect } from "react";
 
 const NewIncome = () => {
   const {
@@ -77,6 +78,10 @@ const NewIncome = () => {
     setDates(arr);
     console.log(arr);
   };
+
+  useEffect(() => {
+    localStorage.setItem("dataArr", JSON.stringify(dataArr));
+  }, [dataArr]);
 
   return (
     <div

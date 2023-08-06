@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useMonefy } from "../context/MonefyContext";
 
 const Circle = () => {
@@ -5,6 +6,14 @@ const Circle = () => {
 
   const circle =
     "flex flex-col w-28 h-28 justify-center items-center rounded-full bg-gray-200";
+
+  useEffect(() => {
+    localStorage.setItem("green", JSON.stringify(green));
+  }, [green]);
+
+  useEffect(() => {
+    localStorage.setItem("red", JSON.stringify(red));
+  }, [red]);
 
   return (
     <div className={circle}>
