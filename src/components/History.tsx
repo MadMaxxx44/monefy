@@ -7,7 +7,7 @@ const History = () => {
     useMonefy();
 
   useEffect(() => {
-    localStorage.setItem("dates2", JSON.stringify(dates));
+    localStorage.setItem("dates3", JSON.stringify(dates));
   }, [dates]);
 
   const calcTotal = (date: string) => {

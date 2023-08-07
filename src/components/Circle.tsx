@@ -8,11 +8,11 @@ const Circle = () => {
     "flex flex-col w-28 h-28 justify-center items-center rounded-full";
 
   useEffect(() => {
-    localStorage.setItem("green", JSON.stringify(green));
+    localStorage.setItem("green3", JSON.stringify(green));
   }, [green]);
 
   useEffect(() => {
-    localStorage.setItem("red", JSON.stringify(red));
+    localStorage.setItem("red3", JSON.stringify(red));
   }, [red]);
 
   return (

@@ -80,7 +80,7 @@ const NewIncome = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem("dataArr", JSON.stringify(dataArr));
+    localStorage.setItem("dataArr3", JSON.stringify(dataArr));
   }, [dataArr]);
 
   return (

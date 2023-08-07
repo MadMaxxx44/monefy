@@ -81,12 +81,12 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
   const closeCategories = () => setCategories(false);
   const toggleCategories = () => setCategories(!categories);
   const [green, setGreen] = useState(() => {
-    const localValue = localStorage.getItem("green");
+    const localValue = localStorage.getItem("green3");
     if (localValue == null) return 0;
     return JSON.parse(localValue) as number;
   });
   const [red, setRed] = useState(() => {
-    const localValue = localStorage.getItem("red");
+    const localValue = localStorage.getItem("red3");
     if (localValue == null) return 0;
     return JSON.parse(localValue) as number;
   });
@@ -102,14 +102,14 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
   const openExpenseForm = () => setExpenseForm(true);
   const closeExpenseForm = () => setExpenseForm(false);
   const [dataArr, setDataArr] = useState<number[]>(() => {
-    const localValue = localStorage.getItem("dataArr");
+    const localValue = localStorage.getItem("dataArr3");
     if (localValue == null) return new Array(15).fill(0);
     return JSON.parse(localValue) as number[];
   });
   const [history, setHistory] = useState(false);
   const toggleHistory = () => setHistory(!history);
   const [dates, setDates] = useState<Dates>(() => {
-    const localValue = localStorage.getItem("dates2");
+    const localValue = localStorage.getItem("dates3");
     if (localValue == null) return {};
     return JSON.parse(localValue) as Dates;
   });
