@@ -102,9 +102,8 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
   const openExpenseForm = () => setExpenseForm(true);
   const closeExpenseForm = () => setExpenseForm(false);
   const [dataArr, setDataArr] = useState<number[]>(() => {
-    new Array(15).fill(0);
     const localValue = localStorage.getItem("dataArr");
-    if (localValue == null) return [];
+    if (localValue == null) return new Array(15).fill(0);
     return JSON.parse(localValue) as number[];
   });
   const [history, setHistory] = useState(false);
