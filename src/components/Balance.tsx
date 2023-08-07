@@ -22,7 +22,7 @@ const Balance = () => {
       >
         <button
           onClick={toggleHistory}
-          className={`flex text-2xl items-center w-fit h-8 p-4 mt-5 mb-7 ${balanceBgDefault}`}
+          className={`flex text-2xl items-center w-fit h-8 p-4 mt-10 mb-7 ${balanceBgDefault}`}
         >
           Balance {formatCurrency(balance)}&#8372;
         </button>

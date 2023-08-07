@@ -5,7 +5,7 @@ const Circle = () => {
   const { green, red, formatCurrency } = useMonefy();
 
   const circle =
-    "flex flex-col w-28 h-28 justify-center items-center rounded-full bg-gray-200";
+    "flex flex-col w-28 h-28 justify-center items-center rounded-full";
 
   useEffect(() => {
     localStorage.setItem("green", JSON.stringify(green));

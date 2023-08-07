@@ -111,7 +111,11 @@ const NewIncome = () => {
             UAH
           </div>
           <input
-            className={"relative bg-green-500 h-8 outline-none text-gray-100"}
+            className={
+              input <= "0"
+                ? "bg-red-400"
+                : "relative bg-green-500 h-8 outline-none text-gray-100"
+            }
             type="number"
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -123,7 +127,7 @@ const NewIncome = () => {
           }}
           className={
             isLocked
-              ? "hover:bg-green-500 text-l transition-all ease-in-out duration-700 font-light px-4 py-2 border-1 border-solid border-green-500 uppercase"
+              ? "hover:bg-green-500 text-l flex justify-center pt-3 transition-all ease-in-out duration-700 font-light pb-2 border-1 border-solid border-green-500 uppercase"
               : "opacity-0 pointer-events-none"
           }
         >
