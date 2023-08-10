@@ -46,6 +46,8 @@ type MonefyContext = {
   setDates: (arg0: Dates) => void;
   openItems: Record<string, boolean>;
   toggleItems: (arr0: string) => void;
+  darkMode: boolean;
+  toggleDarkMode: () => void;
   depositsStr: string;
   salaryStr: string;
   hygieneStr: string;
@@ -119,6 +121,8 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
     updatedOpenItems[arg0] = !updatedOpenItems[arg0];
     setOpenItems(updatedOpenItems);
   };
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => setDarkMode(!darkMode);
   const depositsStr: string = "Deposits";
   const salaryStr: string = "Salary";
   const hygieneStr: string = "Hygiene";
@@ -183,6 +187,8 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
         setDates,
         openItems,
         toggleItems,
+        darkMode,
+        toggleDarkMode,
         depositsStr,
         salaryStr,
         hygieneStr,

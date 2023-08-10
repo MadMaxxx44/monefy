@@ -43,14 +43,22 @@ const Sidebar = () => {
     billsStr,
     taxiStr,
     transportStr,
+    darkMode,
   } = useMonefy();
   return (
     <div
-      className={
-        sidebar
-          ? "transition-all ease-in-out duration-500 z-20 scrollbar-hide absolute top-0 bottom-0 right-0 lg:right-0 w-[300px] overflow-y-auto bg-gray-50"
-          : "transition-all ease-in-out duration-500 absolute top-[-350px] right-0 opacity-0 pointer-events-none"
-      }
+      className={`
+        ${
+          sidebar
+            ? "transition-all ease-in-out duration-500 z-20 scrollbar-hide absolute top-0 bottom-0 right-0 lg:right-0 w-[300px] overflow-y-auto bg-gray-50"
+            : "transition-all ease-in-out duration-500 absolute top-[-350px] right-0 opacity-0 pointer-events-none"
+        }
+        ${
+          sidebar && darkMode
+            ? "transition-all ease-in-out duration-500 z-20 scrollbar-hide absolute top-0 bottom-0 right-0 lg:right-0 w-[300px] overflow-y-auto bg-gray-500"
+            : ""
+        }
+      `}
     >
       <img
         onClick={() => {
@@ -63,7 +71,11 @@ const Sidebar = () => {
       />
       <div
         onClick={toggleCategories}
-        className="flex flex-col items-center hover:bg-gray-200 hover:cursor-pointer pb-8"
+        className={
+          darkMode
+            ? "flex flex-col items-center hover:bg-gray-700 hover:cursor-pointer pb-8"
+            : "flex flex-col items-center hover:bg-gray-200 hover:cursor-pointer pb-8"
+        }
       >
         <img
           className="mt-10 h-[38px] w-[38px]"

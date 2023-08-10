@@ -3,7 +3,7 @@ import { useMonefy } from "../context/MonefyContext";
 import { motion } from "framer-motion";
 
 const History = () => {
-  const { dates, formatCurrency, openItems, toggleItems, history } =
+  const { dates, formatCurrency, openItems, toggleItems, history, darkMode } =
     useMonefy();
 
   useEffect(() => {
@@ -37,11 +37,18 @@ const History = () => {
   return (
     <>
       <div
-        className={
-          history
-            ? "transition-all ease-in-out duration-500 overflow-auto scrollbar-hide flex gap-2 flex-col pt-4 items-center justify-start absolute top-10 h-[368px] w-full bg-gray-200"
-            : "transition-all ease-in-out duration-500 opacity-0 pointer-events-none absolute top-0"
-        }
+        className={`
+          ${
+            history
+              ? "transition-all ease-in-out duration-500 overflow-auto scrollbar-hide flex gap-2 flex-col pt-4 items-center justify-start absolute top-10 h-[368px] w-full bg-gray-200"
+              : "transition-all ease-in-out duration-500 opacity-0 pointer-events-none absolute top-0"
+          }
+            ${
+              history && darkMode
+                ? "transition-all ease-in-out duration-500 overflow-auto scrollbar-hide flex gap-2 flex-col pt-4 items-center justify-start absolute top-10 h-[368px] w-full bg-gray-500"
+                : ""
+            }
+        `}
       >
         <h1 className="font-bold text-lg">Incomes and expenses history</h1>
         <h2>
