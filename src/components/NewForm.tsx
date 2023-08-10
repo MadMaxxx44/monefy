@@ -37,6 +37,7 @@ const NewIncome = () => {
     setDataArr,
     dates,
     setDates,
+    darkMode,
     depositsStr,
     salaryStr,
     hygieneStr,
@@ -76,18 +77,19 @@ const NewIncome = () => {
     const arr = { ...dates };
     arr[date] = [...(arr[date] || []), data];
     setDates(arr);
-    console.log(arr);
   };
 
   useEffect(() => {
     localStorage.setItem("dataArr3", JSON.stringify(dataArr));
   }, [dataArr]);
 
+  const formBgColor: string = darkMode ? "bg-gray-500" : "bg-gray-50";
+
   return (
     <div
       className={
         form
-          ? "absolute top-0 transition-all ease-in-out duration-700 flex flex-col w-full h-full items-center bg-slate-50"
+          ? `absolute top-0 transition-all ease-in-out duration-700 flex flex-col w-full h-full items-center ${formBgColor}`
           : "absolute top-0 opacity-0 pointer-events-none"
       }
     >
@@ -175,11 +177,7 @@ const NewIncome = () => {
           className={`absolute top-[145px] left-1 transition-all ease-in-out duration-700 items-center ${
             isLocked ? "opacity-0 pointer-events-none" : "flex w-full h-full"
           }
-          ${
-            expenseForm
-              ? "flex flex-col w-full h-full gap-2"
-              : "opacity-0 pointer-events-none"
-          }`}
+          ${expenseForm ? "flex flex-col w-full h-full gap-2" : "hidden"}`}
         >
           <div className="flex gap-3">
             <div

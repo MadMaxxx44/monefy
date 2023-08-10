@@ -45,20 +45,16 @@ const Sidebar = () => {
     transportStr,
     darkMode,
   } = useMonefy();
+
+  const sidebarBgColor: string = darkMode ? "bg-gray-500" : "bg-gray-50";
+
   return (
     <div
-      className={`
-        ${
-          sidebar
-            ? "transition-all ease-in-out duration-500 z-20 scrollbar-hide absolute top-0 bottom-0 right-0 lg:right-0 w-[300px] overflow-y-auto bg-gray-50"
-            : "transition-all ease-in-out duration-500 absolute top-[-350px] right-0 opacity-0 pointer-events-none"
-        }
-        ${
-          sidebar && darkMode
-            ? "transition-all ease-in-out duration-500 z-20 scrollbar-hide absolute top-0 bottom-0 right-0 lg:right-0 w-[300px] overflow-y-auto bg-gray-500"
-            : ""
-        }
-      `}
+      className={
+        sidebar
+          ? `transition-all ease-in-out duration-500 z-20 scrollbar-hide absolute top-0 bottom-0 right-0 lg:right-0 w-[300px] overflow-y-auto ${sidebarBgColor}`
+          : "transition-all ease-in-out duration-500 absolute top-[-350px] right-0 opacity-0 pointer-events-none"
+      }
     >
       <img
         onClick={() => {

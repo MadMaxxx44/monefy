@@ -34,21 +34,16 @@ const History = () => {
     return green > red ? "text-green-500" : "text-red-400";
   };
 
+  const historyBgColor: string = darkMode ? "bg-gray-500" : "bg-gray-200";
+
   return (
     <>
       <div
-        className={`
-          ${
-            history
-              ? "transition-all ease-in-out duration-500 overflow-auto scrollbar-hide flex gap-2 flex-col pt-4 items-center justify-start absolute top-10 h-[368px] w-full bg-gray-200"
-              : "transition-all ease-in-out duration-500 opacity-0 pointer-events-none absolute top-0"
-          }
-            ${
-              history && darkMode
-                ? "transition-all ease-in-out duration-500 overflow-auto scrollbar-hide flex gap-2 flex-col pt-4 items-center justify-start absolute top-10 h-[368px] w-full bg-gray-500"
-                : ""
-            }
-        `}
+        className={
+          history
+            ? `transition-all ease-in-out duration-500 overflow-auto scrollbar-hide flex gap-2 flex-col pt-4 items-center justify-start absolute top-10 h-[368px] w-full ${historyBgColor}`
+            : "transition-all ease-in-out duration-500 opacity-0 pointer-events-none absolute top-0"
+        }
       >
         <h1 className="font-bold text-lg">Incomes and expenses history</h1>
         <h2>
