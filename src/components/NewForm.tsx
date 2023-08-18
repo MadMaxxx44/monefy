@@ -37,6 +37,9 @@ const NewIncome = () => {
     setDataArr,
     dates,
     setDates,
+    // sendData,
+    api,
+    auth,
     darkMode,
     depositsStr,
     salaryStr,
@@ -77,6 +80,7 @@ const NewIncome = () => {
     const arr = { ...dates };
     arr[date] = [...(arr[date] || []), data];
     setDates(arr);
+    // sendData(arr);
   };
 
   useEffect(() => {
@@ -84,6 +88,53 @@ const NewIncome = () => {
   }, [dataArr]);
 
   const formBgColor: string = darkMode ? "bg-gray-500" : "bg-gray-50";
+
+  const sendGreen = async (green: number, username: string) => {
+    try {
+      const resp = await api.post(
+        "/green",
+        JSON.stringify({ green, username })
+      );
+      console.log(resp?.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const sendRed = async (red: number, username: string) => {
+    try {
+      const resp = await api.post("/red", JSON.stringify({ red, username }));
+      console.log(resp?.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getChart = async () => {
+    try {
+      const resp = await api.get(`/chart/${auth.user}`);
+      console.log(resp?.data?.chart);
+      return resp.data.chart;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  };
+
+  const sendChart = async (index: number, value: number) => {
+    try {
+      const oldChart = await getChart();
+      const newChart = [...oldChart];
+      newChart[index] += value;
+      const resp = await api.post(
+        "/chart",
+        JSON.stringify({ chart: newChart, username: auth.user })
+      );
+      console.log(resp?.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div
@@ -149,7 +200,8 @@ const NewIncome = () => {
                   locked(),
                   setInput("0"),
                   setGreen(green + Number(input)),
-                  addDate(depositsStr, Number(input)))
+                  addDate(depositsStr, Number(input)),
+                  sendGreen(Number(input), auth.user))
                 : (locked(), setInput("0"));
             }}
             className="flex flex-col w-16 text-sm hover:bg-green-500 hover:cursor-pointer p-2 items-center"
@@ -189,7 +241,8 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(0, Number(input)),
-                    addDate(hygieneStr, Number(input)))
+                    addDate(hygieneStr, Number(input)),
+                    sendChart(0, Number(input)))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"
@@ -259,7 +312,8 @@ const NewIncome = () => {
                     closeExpenseForm(),
                     setRed(red + Number(input)),
                     setArrData(4, Number(input)),
-                    addDate(cafeStr, Number(input)))
+                    addDate(cafeStr, Number(input)),
+                    sendRed(Number(input), auth.user))
                   : (locked(), setInput("0"));
               }}
               className="flex flex-col w-20 h-16 text-xs hover:bg-green-500 hover:cursor-pointer p-2 items-center"

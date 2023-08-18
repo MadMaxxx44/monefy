@@ -88,7 +88,7 @@ const options = {
 const plugins = [doughnutLabelsLine];
 
 const Chart = () => {
-  const { dataArr } = useMonefy();
+  const { newChartValue } = useMonefy();
 
   // eslint-disable-next-line react-refresh/only-export-components
   const data = {
@@ -112,7 +112,7 @@ const Chart = () => {
     datasets: [
       {
         label: "Amount",
-        data: dataArr,
+        data: newChartValue,
         backgroundColor: [
           "rgba(255, 0, 0, 1)",
           "rgba(0, 128, 0, 1)",

@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import axios, { AxiosInstance } from "axios";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface Dates {
   [date: string]: {
@@ -12,7 +19,15 @@ type MonefyProviderProps = {
   children: ReactNode;
 };
 
+type OBG = {
+  user: string;
+  accessToken: number;
+};
+
 type MonefyContext = {
+  api: AxiosInstance;
+  auth: OBG;
+  setAuth: (arg0: OBG) => void;
   sidebar: boolean;
   openSidebar: () => void;
   closeSidebar: () => void;
@@ -48,6 +63,9 @@ type MonefyContext = {
   toggleItems: (arr0: string) => void;
   darkMode: boolean;
   toggleDarkMode: () => void;
+  newChartValue: number[];
+  setNewChartValue: (arg0: number[]) => void;
+  // sendData: (arg0: Dates) => void;
   depositsStr: string;
   salaryStr: string;
   hygieneStr: string;
@@ -75,6 +93,10 @@ export function useMonefy() {
 }
 
 export function MonefyProvider({ children }: MonefyProviderProps) {
+  const [auth, setAuth] = useState({
+    user: "",
+    accessToken: 0,
+  });
   const [sidebar, setSidebar] = useState(false);
   const openSidebar = () => setSidebar(true);
   const closeSidebar = () => setSidebar(false);
@@ -123,6 +145,9 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
   };
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => setDarkMode(!darkMode);
+  const [newChartValue, setNewChartValue] = useState<number[]>(
+    new Array(15).fill(0)
+  );
   const depositsStr: string = "Deposits";
   const salaryStr: string = "Salary";
   const hygieneStr: string = "Hygiene";
@@ -151,9 +176,48 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
     return formatter.format(number);
   };
 
+  const api = axios.create({
+    baseURL: "http://localhost:3000",
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const getChart = async () => {
+    try {
+      const resp = await api.get(`/chart/${auth.user}`);
+      console.log(resp?.data?.chart);
+      return resp.data.chart;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const fetchChart = async () => {
+      const value = await getChart();
+      setNewChartValue(value);
+    };
+    fetchChart();
+  }, [dataArr]);
+
+  // const sendData = async (data: Dates) => {
+  //   try {
+  //     const resp = await axios.post("/store", { dates: data });
+  //     console.log(resp.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <MonefyContext.Provider
       value={{
+        api,
+        auth,
+        setAuth,
         sidebar,
         openSidebar,
         closeSidebar,
@@ -189,6 +253,9 @@ export function MonefyProvider({ children }: MonefyProviderProps) {
         toggleItems,
         darkMode,
         toggleDarkMode,
+        newChartValue,
+        setNewChartValue,
+        // sendData,
         depositsStr,
         salaryStr,
         hygieneStr,
